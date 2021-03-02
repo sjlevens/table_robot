@@ -57,7 +57,6 @@ function App() {
                 transition={{ duration: 0.3, delay: 0.08 }}
               >
                 <Center
-                  color="red.900"
                   cursor={placed ? '' : 'pointer'}
                   h="18vh"
                   w="18vw"
@@ -69,7 +68,7 @@ function App() {
                   mb="1vh"
                   mr="1vw"
                 >
-                  <Text fontFamily="mono">{`${x} - ${Edge.North - y}`}</Text>
+                  <Text fontFamily="mono" fontWeight="bold">{`${x} - ${Edge.North - y}`}</Text>
                 </Center>
               </motion.div>
             ))}
