@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useToast } from '@chakra-ui/react'
+import sleep from './utils/sleep'
 
 const wiggle = () => (Math.random() - 0.5) * 10
 
 const Arrow = ({ position: { x, y, f } }: { position: { x: number; y: number; f: number } }) => {
   const [wiggler, setWiggler] = useState(0)
+  const toast = useToast()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -12,6 +15,14 @@ const Arrow = ({ position: { x, y, f } }: { position: { x: number; y: number; f:
     }, 300)
     return () => clearInterval(interval)
   })
+
+  const funnyReference = async () => {
+    toast({ description: 'What is my purpose?' })
+    await sleep(1000)
+    toast({ description: 'You pass butter', status: 'warning' })
+    await sleep(1500)
+    toast({ description: 'Oh my god...', status: 'error' })
+  }
 
   return (
     <motion.div
@@ -23,6 +34,7 @@ const Arrow = ({ position: { x, y, f } }: { position: { x: number; y: number; f:
         bottom: `calc(${20 * y}vh + 7vh)`,
         transition: 'bottom 0.3s, left 0.3s, transform 0.3s',
       }}
+      onClick={funnyReference}
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="72" height="60">
         <path d="M 72 60 L 36 60 L 36 0 Z" opacity="0.5"></path>

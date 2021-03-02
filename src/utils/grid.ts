@@ -1,5 +1,5 @@
-const W = 5
-const H = 5
+export const W = 5
+export const H = 5
 const grid = Array.from(Array(W), () => Array(H).fill(''))
 
 export enum Edge {

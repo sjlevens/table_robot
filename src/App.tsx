@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Center, Text } from '@chakra-ui/react'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { useSwipeable } from 'react-swipeable'
 import { motion } from 'framer-motion'
 import Helper from './Helper'
 import Arrow from './Arrow'
@@ -21,6 +22,16 @@ function App() {
       : setPosition(cur => ({ ...cur, f: key === 'ArrowLeft' ? cur.f - 1 : cur.f + 1 })),
   )
 
+  const swipeHandlers = useSwipeable({
+    onSwiped: ({ dir }) =>
+      dir === 'Up'
+        ? setPosition(handleMovement)
+        : setPosition(cur => ({
+            ...cur,
+            f: dir === 'Left' ? cur.f - 1 : dir === 'Right' ? cur.f + 1 : cur.f,
+          })),
+  })
+
   const handlePlace = ({ x, y }: { x: number; y: number }) => () => {
     if (!placed) {
       setPosition({ x, y, f: 0 })
@@ -29,7 +40,7 @@ function App() {
   }
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div {...swipeHandlers} style={{ width: '100vw', height: '100vh', overflow: 'none' }}>
       {placed && <Arrow position={position} />}
       <Helper position={position} placed={placed} />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
