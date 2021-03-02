@@ -33,10 +33,8 @@ function App() {
   })
 
   const handlePlace = ({ x, y }: { x: number; y: number }) => () => {
-    if (!placed) {
-      setPosition({ x, y, f: 0 })
-      setPlaced(true)
-    }
+    setPosition(({ f }) => ({ x, y, f }))
+    setPlaced(true)
   }
 
   return (
