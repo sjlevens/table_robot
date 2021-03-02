@@ -30,21 +30,7 @@ function App() {
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
-      {placed && (
-        <div
-          style={{
-            zIndex: 100,
-            visibility: placed ? 'visible' : 'hidden',
-            transform: `rotate(${90 * position.f}deg)`,
-            position: 'absolute',
-            left: `calc(${20 * position.x}vw + 5vw)`,
-            bottom: `calc(${20 * position.y}vh + 7vh)`,
-            transition: 'bottom 0.3s, left 0.3s, transform 0.3s',
-          }}
-        >
-          <Arrow />
-        </div>
-      )}
+      {placed && <Arrow position={position} />}
       <Helper position={position} placed={placed} />
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         {grid.map((col, x) => (
@@ -53,7 +39,7 @@ function App() {
               <motion.div
                 key={y}
                 animate={
-                  position.x === x && position.y === Edge.North - y
+                  placed && position.x === x && position.y === Edge.North - y
                     ? { scale: [1, 0.9, 0.9, 1] }
                     : {}
                 }
