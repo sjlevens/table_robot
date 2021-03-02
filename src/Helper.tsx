@@ -24,7 +24,7 @@ const Helper = ({
   placed: Boolean
 }) => (
   <div style={{ position: 'absolute', top: '1rem', left: '1rem' }}>
-    <Popover>
+    <Popover defaultIsOpen={true}>
       <PopoverTrigger>
         <IconButton aria-label="Help" icon={<QuestionIcon />} />
       </PopoverTrigger>
